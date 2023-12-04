@@ -38,9 +38,21 @@ public class Card {
         Card card = (Card) o;
         return value == card.value && Objects.equals(suit, card.suit);
     }
-
     @Override
     public String toString() {
-        return "Card{" + "value=" + value + ", suit='" + suit + '\'' + '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("**********************\n");
+        stringBuilder.append("*value=").append(value).append("*\n");
+        stringBuilder.append("*                    *\n");
+        stringBuilder.append("*                    *\n");
+        stringBuilder.append("*                    *\n");
+        stringBuilder.append("*                    *\n");
+        stringBuilder.append("*                    *\n");
+        stringBuilder.append("*                    *\n");
+        stringBuilder.append("*                    *\n");
+        stringBuilder.append("*suit=").append(suit).append("*\n");
+        stringBuilder.append("*                    *\n");
+        stringBuilder.append("**********************\n");
+        return stringBuilder.toString();
     }
 }
