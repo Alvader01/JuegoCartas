@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.Objects;
-
 public class Card {
     private int value;
     private String suit;
@@ -9,10 +7,6 @@ public class Card {
     public Card(int value, String suit) {
         this.value = value;
         this.suit = suit;
-    }
-
-    public Card(){
-        this(-1,"");
     }
 
     public int getValue() {
@@ -31,28 +25,30 @@ public class Card {
         this.suit = suit;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Card card = (Card) o;
-        return value == card.value && Objects.equals(suit, card.suit);
+    public boolean isAce() {
+        return value == 1;
     }
+
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("**********************\n");
-        stringBuilder.append("*value=").append(value).append("*\n");
-        stringBuilder.append("*                    *\n");
-        stringBuilder.append("*                    *\n");
-        stringBuilder.append("*                    *\n");
-        stringBuilder.append("*                    *\n");
-        stringBuilder.append("*                    *\n");
-        stringBuilder.append("*                    *\n");
-        stringBuilder.append("*                    *\n");
-        stringBuilder.append("*suit=").append(suit).append("*\n");
-        stringBuilder.append("*                    *\n");
-        stringBuilder.append("**********************\n");
-        return stringBuilder.toString();
+        String cardValue;
+        switch (value) {
+            case 1:
+                cardValue = "A";
+                break;
+            case 11:
+                cardValue = "J";
+                break;
+            case 12:
+                cardValue = "Q";
+                break;
+            case 13:
+                cardValue = "K";
+                break;
+            default:
+                cardValue = String.valueOf(value);
+                break;
+        }
+        return "[" + cardValue + " " + suit + "]";
     }
 }
