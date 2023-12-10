@@ -89,11 +89,11 @@ public class ViewGame {
     }
 
     public static void displayGameOver() {
-        System.out.println("************************************");
-        System.out.println("*                                  *");
-        System.out.println("*Fin del juego  ¡Gracias por jugar!*");
-        System.out.println("*                                  *");
-        System.out.println("************************************");
+        System.out.println("****************************************");
+        System.out.println("*                                      *");
+        System.out.println("*Fin de la partida  ¡Gracias por jugar!*");
+        System.out.println("*                                      *");
+        System.out.println("****************************************");
     }
 }
 

@@ -25,12 +25,16 @@ public class Game {
         String[] playerNames;
 
         while (playGame) {
+            String input = null;
             ViewGame.printWelcome();
             System.out.println("¿Unas partiditas mostro? (s/n)");
-            String input = scanner.nextLine().toLowerCase();
+            do {
+                input = scanner.nextLine().toLowerCase();
+            }while (input == null || input == "");
 
             if (input.equals("s")) {
                 System.out.println("¿Cuántos vais a jugar? (entre 1 y 4):");
+                numPlayers = scanner.nextInt();
                 while (numPlayers < 1 || numPlayers > 4) {
                     try {
                         numPlayers = scanner.nextInt();
@@ -100,7 +104,6 @@ public class Game {
                 }
             }
         }
-
         dealer.playDealerTurn(deck);
         ViewGame.displayDealerHand(dealer);
     }
@@ -111,12 +114,12 @@ public class Game {
                 if (player.getTotalValue() <= 21 && (dealer.checkDealerBust() || player.getTotalValue() > dealer.calculateHandValue())) {
                     ViewGame.displayResult("¡" + player.getPlayerName() + " gana!");
                     if (player.getTotalValue() == 21 && (dealer.checkDealerBust() || player.getTotalValue() > dealer.calculateHandValue())) {
-                        System.out.println("El diablo" + player.getPlayerName() + "consiguio BlackJack");
+                        System.out.println("El diablo " + player.getPlayerName() + " consiguio BlackJack");
                     }
                 } else if (player.getTotalValue() <= 21 && player.getTotalValue() == dealer.calculateHandValue()) {
                     ViewGame.displayDraw();
                 } else {
-                    ViewGame.displayResult("Vaya" + player.getPlayerName() + "perdio todo lo que le quedaba");
+                    ViewGame.displayResult("Vaya " + player.getPlayerName() + " perdio todo lo que le quedaba");
                 }
             }
 

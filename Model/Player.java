@@ -58,29 +58,18 @@ public class Player {
 
     private void calculateTotalValue() {
         totalValue = 0;
-        int numOfAces = 0;
-
         for (Card card : hand) {
             if (card != null) {
                 int value = card.getValue();
-                totalValue += value;
-                if (value == 1) {
-                    if (totalValue + 10 <= 21) {
-                        totalValue += 10;
-                    } else {
-                        numOfAces++;
-                    }
+                if (value == 1 && totalValue < 11) {
+                    totalValue += 11;
+                } else if (value == 11 || value == 12 || value == 13) {
+                    totalValue += 10;
+                } else {
+                    totalValue += value;
                 }
+
             }
         }
-
-        System.out.println("Valor de la mano del jugador antes de ases: " + totalValue); // Agregamos esta línea
-
-        while (numOfAces > 0 && totalValue <= 11) {
-            totalValue += 10;
-            numOfAces--;
-        }
-
-        System.out.println("Valor de la mano del jugador después de ases: " + totalValue); // Y esta línea
     }
 }

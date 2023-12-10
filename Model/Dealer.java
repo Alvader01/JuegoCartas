@@ -4,10 +4,12 @@ package Model;
 public class Dealer {
     private Player[] players;
     private Card[] hand;
+    private int totalValue;
 
     public Dealer() {
         this.players = new Player[4];
         this.hand = new Card[10];
+        this.totalValue = 0;
     }
 
     public Player[] getPlayers() {
@@ -62,10 +64,6 @@ public class Dealer {
                 player.addCardToHand(deck.drawCard()); // Añadir una segunda carta al jugador
             }
         }
-        for (int i = 0; i < hand.length; i++) {
-            hand[i] = deck.drawCard();
-            hand[++i] = deck.drawCard(); // Añadir una segunda carta al arreglo hand
-        }
     }
 
     public void playDealerTurn(Deck deck) {
@@ -88,25 +86,22 @@ public class Dealer {
     }
 
     public int calculateHandValue() {
-        int value = 0;
-        boolean hasAce = false;
-
+        totalValue = 0;
         for (Card card : hand) {
             if (card != null) {
-                int cardValue = card.getValue();
-                if (cardValue == 1) {
-                    hasAce = true;
+                int value = card.getValue();
+                if (value == 1 && totalValue < 11) {
+                    totalValue += 11;
+                } else if (value == 11 || value == 12 || value == 13) {
+                    totalValue += 10;
+                } else {
+                    totalValue += value;
                 }
-                value += (cardValue > 10) ? 10 : cardValue;
+
             }
         }
 
-        if (hasAce && value + 10 <= 21) {
-            value += 10;
-        }
-
-        return value;
-
+        return totalValue;
     }
 }
 
