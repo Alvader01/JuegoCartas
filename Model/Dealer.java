@@ -39,10 +39,14 @@ public class Dealer {
         System.out.println("Total de puntos del dealer: " + dealerTotal);
     }
 
-    public void initializePlayers(int numPlayers) {
+    public void initializePlayers(int numPlayers,String[] playerNames) {
         int totalPlayers = Math.min(Math.max(numPlayers, 1), 4);
-        for (int i = 0; i < totalPlayers; i++) {
-            players[i] = new Player("Player " + (i + 1));
+        for (int i = 0; i < totalPlayers; i++) {;
+            if (i < playerNames.length) {
+                players[i] = new Player(playerNames[i]);
+            } else {
+                players[i] = new Player("Jugador" + (i + 1));
+            }
         }
     }
 
@@ -54,24 +58,27 @@ public class Dealer {
         for (Player player : players) {
             if (player != null) {
                 player.addCardToHand(deck.drawCard());
+                player.addCardToHand(deck.drawCard()); // Añadir una segunda carta al jugador
             }
         }
         for (int i = 0; i < hand.length; i++) {
             hand[i] = deck.drawCard();
+            hand[++i] = deck.drawCard(); // Añadir una segunda carta al arreglo hand
         }
     }
 
     public void playDealerTurn(Deck deck) {
         int dealerTotal = calculateHandValue();
 
-        while (dealerTotal < 17 && dealerTotal <= 21) {
-            System.out.println("Valor actual del dealer: " + dealerTotal); // Agregar esta línea para imprimir el valor actual
-            for (int i = 0; i < hand.length; i++) {
+        while (dealerTotal < 17) {
+            for (int i = 0; i < 17;i++) {
+                i--;
                 if (hand[i] == null) {
                     hand[i] = deck.drawCard();
                     dealerTotal = calculateHandValue();
                     break;
                 }
+                i=dealerTotal;
             }
         }
     }
@@ -81,23 +88,28 @@ public class Dealer {
         return calculateHandValue() > 21;
     }
 
-    public int calculateHandValue () {
+    public int calculateHandValue() {
         int value = 0;
         boolean hasAce = false;
+        int aceCount = 0;
 
         for (Card card : hand) {
             if (card != null) {
                 int cardValue = card.getValue();
                 if (cardValue == 1) {
                     hasAce = true;
+                    aceCount++;
                 }
                 value += (cardValue > 10) ? 10 : cardValue;
-                if (hasAce && value + 10 <= 21) {
-                    value += 10;
-                }
             }
+        }
+        while (aceCount > 0 && value + 10 <= 21) {
+            value += 10;
+            aceCount--;
         }
 
         return value;
     }
 }
+
+

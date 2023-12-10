@@ -46,7 +46,6 @@ public class Deck {
 
     public Card drawCard() {
         if (top >= cards.length) {
-            // Reinitialize deck if it's empty
             initializeDeck();
             top = 0;
         }

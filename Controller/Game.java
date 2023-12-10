@@ -5,6 +5,7 @@ import Model.Deck;
 import Model.Player;
 import View.ViewGame;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -30,11 +31,13 @@ public class Game {
 
             if (input.equals("s")) {
                 System.out.println("¿Cuántos vais a jugar? (entre 1 y 4):");
-                int numPlayers = scanner.nextInt();
-
                 while (numPlayers < 1 || numPlayers > 4) {
-                    System.out.println("¿No sabes leer? Pon un número entre 1 y 4:");
-                    numPlayers = scanner.nextInt();
+                    try {
+                        numPlayers = scanner.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("¿No sabes leer? Pon un número entre 1 y 4:");
+                        scanner.nextLine();
+                    }
                 }
 
                 playerNames = new String[numPlayers];
@@ -42,7 +45,7 @@ public class Game {
                     System.out.println("Escribe el nombre del jugador " + (i + 1));
                     playerNames[i] = scanner.next();
                 }
-                dealer.initializePlayers(numPlayers);
+                dealer.initializePlayers(numPlayers, playerNames);
                 players = dealer.getInitializedPlayers();
                 deck.shuffleDeck();
                 dealer.dealInitialCards(deck);
@@ -69,19 +72,25 @@ public class Game {
 
                 while (playerTurn) {
                     ViewGame.displayOptions();
-                    int choice = scanner.nextInt();
 
-                    switch (choice) {
-                        case 1:
-                            player.addCardToHand(deck.drawCard());
-                            ViewGame.displayPlayerHand(player);
-                            break;
-                        case 2:
-                            playerTurn = false;
-                            break;
-                        default:
-                            System.out.println("Opción inválida, elige nuevamente.");
-                            break;
+                    if (scanner.hasNextInt()) {
+                        int choice = scanner.nextInt();
+
+                        switch (choice) {
+                            case 1:
+                                player.addCardToHand(deck.drawCard());
+                                ViewGame.displayPlayerHand(player);
+                                break;
+                            case 2:
+                                playerTurn = false;
+                                break;
+                            default:
+                                System.out.println("Por favor, elige una opción válida (1 o 2).");
+                                break;
+                        }
+                    } else {
+                        System.out.println("Por favor, introduce un número válido.");
+                        scanner.next();
                     }
 
                     if (player.getTotalValue() > 21) {
@@ -115,3 +124,4 @@ public class Game {
         ViewGame.displayGameOver();
     }
 }
+

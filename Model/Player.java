@@ -65,7 +65,11 @@ public class Player {
                 int value = card.getValue();
                 totalValue += value;
                 if (value == 1) {
-                    numOfAces++;
+                    if (totalValue + 10 <= 21) {
+                        totalValue += 10;
+                    } else {
+                        numOfAces++;
+                    }
                 }
             }
         }
