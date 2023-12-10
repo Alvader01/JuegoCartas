@@ -74,9 +74,13 @@ public class Player {
             }
         }
 
+        System.out.println("Valor de la mano del jugador antes de ases: " + totalValue); // Agregamos esta línea
+
         while (numOfAces > 0 && totalValue <= 11) {
             totalValue += 10;
             numOfAces--;
         }
+
+        System.out.println("Valor de la mano del jugador después de ases: " + totalValue); // Y esta línea
     }
 }

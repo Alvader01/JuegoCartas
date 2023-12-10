@@ -111,12 +111,12 @@ public class Game {
                 if (player.getTotalValue() <= 21 && (dealer.checkDealerBust() || player.getTotalValue() > dealer.calculateHandValue())) {
                     ViewGame.displayResult("¡" + player.getPlayerName() + " gana!");
                     if (player.getTotalValue() == 21 && (dealer.checkDealerBust() || player.getTotalValue() > dealer.calculateHandValue())) {
-                        System.out.println("¡" + player.getPlayerName() + " tiene Blackjack!");
+                        System.out.println("El diablo" + player.getPlayerName() + "consiguio BlackJack");
                     }
                 } else if (player.getTotalValue() <= 21 && player.getTotalValue() == dealer.calculateHandValue()) {
                     ViewGame.displayDraw();
                 } else {
-                    ViewGame.displayResult("¡" + player.getPlayerName() + " pierde!");
+                    ViewGame.displayResult("Vaya" + player.getPlayerName() + "perdio todo lo que le quedaba");
                 }
             }
 

@@ -39,9 +39,10 @@ public class Dealer {
         System.out.println("Total de puntos del dealer: " + dealerTotal);
     }
 
-    public void initializePlayers(int numPlayers,String[] playerNames) {
+    public void initializePlayers(int numPlayers, String[] playerNames) {
         int totalPlayers = Math.min(Math.max(numPlayers, 1), 4);
-        for (int i = 0; i < totalPlayers; i++) {;
+        for (int i = 0; i < totalPlayers; i++) {
+            ;
             if (i < playerNames.length) {
                 players[i] = new Player(playerNames[i]);
             } else {
@@ -71,45 +72,43 @@ public class Dealer {
         int dealerTotal = calculateHandValue();
 
         while (dealerTotal < 17) {
-            for (int i = 0; i < 17;i++) {
-                i--;
+            for (int i = 0; i < hand.length; i++) {
                 if (hand[i] == null) {
                     hand[i] = deck.drawCard();
                     dealerTotal = calculateHandValue();
                     break;
                 }
-                i=dealerTotal;
             }
         }
     }
 
 
-    public boolean checkDealerBust () {
+    public boolean checkDealerBust() {
         return calculateHandValue() > 21;
     }
 
     public int calculateHandValue() {
         int value = 0;
         boolean hasAce = false;
-        int aceCount = 0;
 
         for (Card card : hand) {
             if (card != null) {
                 int cardValue = card.getValue();
                 if (cardValue == 1) {
                     hasAce = true;
-                    aceCount++;
                 }
                 value += (cardValue > 10) ? 10 : cardValue;
             }
         }
-        while (aceCount > 0 && value + 10 <= 21) {
+
+        if (hasAce && value + 10 <= 21) {
             value += 10;
-            aceCount--;
         }
 
         return value;
+
     }
 }
+
 
 

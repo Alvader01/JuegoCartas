@@ -18,8 +18,13 @@ public class ViewGame {
     }
 
     public static void printWelcome() {
-        System.out.println("¡Bienvenido al juego de Blackjack!");
-        System.out.println("¡A disfrutar y buena suerte!");
+        System.out.println("-----------------------------------------------");
+        System.out.println("                                               ");
+        System.out.println(" Bienvenido al juego de Blackjack de Alvader   ");
+        System.out.println("                                               ");
+        System.out.println("    Te deseo buena suerte,es muy adictivo      ");
+        System.out.println("                                               ");
+        System.out.println("-----------------------------------------------");
     }
 
     public static void displayCard(int value, String suit) {
@@ -73,7 +78,7 @@ public class ViewGame {
     }
 
     public static void displayDraw() {
-        System.out.println("¡Empate!");
+        System.out.println("Vaya, parece que tenemos un empate");
     }
 
 
@@ -84,7 +89,11 @@ public class ViewGame {
     }
 
     public static void displayGameOver() {
-        System.out.println("Fin del juego. ¡Gracias por jugar!");
+        System.out.println("************************************");
+        System.out.println("*                                  *");
+        System.out.println("*Fin del juego  ¡Gracias por jugar!*");
+        System.out.println("*                                  *");
+        System.out.println("************************************");
     }
 }
 
