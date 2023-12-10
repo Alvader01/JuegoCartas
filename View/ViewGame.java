@@ -1,5 +1,6 @@
 package View;
 
+import Model.Card;
 import Model.Player;
 import Model.Dealer;
 
@@ -51,13 +52,21 @@ public class ViewGame {
 
     public static void displayPlayerHand(Player player) {
         System.out.println("Mano de " + player.getPlayerName() + ":");
-        player.getHand().forEach(card -> displayCard(card.getValue(), card.getSuit()));
+        for (Card card : player.getHand()) {
+            if (card != null) {
+                displayCard(card.getValue(), card.getSuit());
+            }
+        }
         System.out.println("Total: " + player.getTotalValue());
     }
 
     public static void displayDealerHand(Dealer dealer) {
         System.out.println("Mano del Dealer:");
-        dealer.getHand().forEach(card -> displayCard(card.getValue(), card.getSuit()));
+        for (Card card : dealer.getHand()) {
+            if (card != null) {
+                displayCard(card.getValue(), card.getSuit());
+            }
+        }
     }
     public static void displayResult(String result) {
         System.out.println("Resultado: " + result);
