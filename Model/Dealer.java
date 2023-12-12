@@ -21,8 +21,8 @@ public class Dealer {
     }
 
     public Card[] getHand() {
-        int dealerTotal = calculateHandValue();
-        System.out.println("Total de puntos del dealer: " + dealerTotal);
+
+
         return hand;
     }
 
