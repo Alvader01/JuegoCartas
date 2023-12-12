@@ -46,15 +46,6 @@ public class Player {
         }
     }
 
-    public void showHand() {
-        System.out.println("Mano de " + playerName + ":");
-        for (Card card : hand) {
-            if (card != null) {
-                System.out.println(card);
-            }
-        }
-        System.out.println("Valor total: " + totalValue);
-    }
 
     private void calculateTotalValue() {
         totalValue = 0;

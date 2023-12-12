@@ -12,14 +12,6 @@ public class Deck {
         initializeDeck();
     }
 
-    public Card[] getCards() {
-        return cards;
-    }
-
-    public void setCards(Card[] cards) {
-        this.cards = cards;
-    }
-
     private void initializeDeck() {
         String[] suits = {"♦", "♣", "♠", "♥"};
         int index = 0;

@@ -25,9 +25,7 @@ public class Card {
         this.suit = suit;
     }
 
-    public boolean isAce() {
-        return value == 1;
-    }
+
 
     @Override
     public String toString() {

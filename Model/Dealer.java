@@ -30,21 +30,13 @@ public class Dealer {
         this.hand = hand;
     }
 
-    public void showDealerHand() {
-        System.out.println("Mano del dealer:");
-        for (Card card : hand) {
-            if (card != null) {
-                System.out.println(card);
-            }
-        }
-        int dealerTotal = calculateHandValue();
-        System.out.println("Total de puntos del dealer: " + dealerTotal);
-    }
 
     public void initializePlayers(int numPlayers, String[] playerNames) {
         int totalPlayers = Math.min(Math.max(numPlayers, 1), 4);
+        // Reinicia el array de jugadores para que al jugar la segunda vez no se queden guardados los jugadores
+        players = new Player[4];
+
         for (int i = 0; i < totalPlayers; i++) {
-            ;
             if (i < playerNames.length) {
                 players[i] = new Player(playerNames[i]);
             } else {
@@ -61,7 +53,7 @@ public class Dealer {
         for (Player player : players) {
             if (player != null) {
                 player.addCardToHand(deck.drawCard());
-                player.addCardToHand(deck.drawCard()); // Añadir una segunda carta al jugador
+                player.addCardToHand(deck.drawCard());
             }
         }
     }
@@ -78,6 +70,10 @@ public class Dealer {
                 }
             }
         }
+    }
+    public void resetDealer() {
+        hand = new Card[10]; // Reinicia la mano del dealer
+        totalValue = 0; // Reinicia el valor total del dealer
     }
 
 

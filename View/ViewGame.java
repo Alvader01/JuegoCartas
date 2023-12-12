@@ -72,6 +72,7 @@ public class ViewGame {
                 displayCard(card.getValue(), card.getSuit());
             }
         }
+        System.out.println("Total de puntos del dealer: " + dealer.calculateHandValue());
     }
     public static void displayResult(String result) {
         System.out.println("Resultado: " + result);
